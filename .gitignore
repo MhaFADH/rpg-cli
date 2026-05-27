@@ -1,0 +1,5 @@
+Archive/
+bin/
+obj/
+.DS_Store
+.log
