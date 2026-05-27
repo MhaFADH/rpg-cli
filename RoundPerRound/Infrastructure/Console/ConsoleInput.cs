@@ -22,4 +22,30 @@ public static class ConsoleInput
       return input;
     }
   }
+
+
+  public static int ReadChoiceFromMenu(string prompt, string[] choices)
+  {
+    while (true)
+    {
+      int maxLenght = choices.Length;
+      Console.WriteLine(prompt + "\n");
+      for (int i = 0; i < maxLenght; i++)
+      {
+        Console.WriteLine($"{i + 1}. {choices[i]}");
+      }
+
+      string? input = Console.ReadLine();
+
+      if (!int.TryParse(input, out int choice) || choice < 1 || choice > maxLenght)
+      {
+        Console.Clear();
+        Console.WriteLine($"Input must be a number between 1 and {maxLenght}.\n");
+        continue;
+      }
+
+      Console.Clear();
+      return choice;
+    }
+  }
 }
