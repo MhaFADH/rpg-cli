@@ -2,7 +2,7 @@ using RPG.RoundPerRound.Domain.Enums;
 
 namespace RPG.RoundPerRound.Domain.Entities;
 
-public abstract class Hero(HeroClass heroClass, string name, int maxHp, int baseAttack, ISkill specialSkill) : Character(maxHp, baseAttack, 0, specialSkill)
+public abstract class Hero(HeroClass heroClass, string name, int maxHp, int baseAttack, int armor, ISkill specialSkill) : Character(maxHp, baseAttack, armor, specialSkill)
 {
   public string Name { get; } = name;
   public int RemainingHealing { get; protected set; } = 2;

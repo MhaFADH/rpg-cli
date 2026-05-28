@@ -30,4 +30,9 @@ public abstract class Character(int maxHp, int baseAttack, int armor, ISkill spe
   {
     SpecialSkill.Use(this, target);
   }
+
+  public bool CanUseSpecialSkill()
+  {
+    return SpecialSkill.IsAvailable();
+  }
 }
