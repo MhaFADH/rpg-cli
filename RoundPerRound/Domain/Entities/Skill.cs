@@ -26,4 +26,9 @@ public abstract class ISkill(string name, int defaultCoolDown)
   {
     CoolDown = DefaultCoolDown;
   }
+
+  public bool IsAvailable()
+  {
+    return CoolDown == 0;
+  }
 }

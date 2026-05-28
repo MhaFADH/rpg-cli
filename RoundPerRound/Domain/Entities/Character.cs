@@ -1,12 +1,12 @@
 namespace RPG.RoundPerRound.Domain.Entities;
 
-public abstract class Character(string name, int maxHp, int baseAttack, int armor)
+public abstract class Character(int maxHp, int baseAttack, int armor, ISkill specialSkill)
 {
-  public string Name { get; } = name;
   public int CurrentHp { get; protected set; } = maxHp;
   public int BaseAttack { get; } = baseAttack;
+  public int MaxHp { get; } = maxHp;
+  private ISkill SpecialSkill { get; } = specialSkill;
   public int Armor { get; } = armor;
-  public const int MinNameLength = 3;
 
   public void Attack(Character target)
   {
@@ -24,5 +24,10 @@ public abstract class Character(string name, int maxHp, int baseAttack, int armo
     // got issues here, 100.0 mandatory because otherwise it will do integer division and multiplier will always be 0
     double multiplier = 100.0 / (100 + effectiveArmor);
     CurrentHp -= (int)Math.Round(damage * multiplier);
+  }
+
+  public void UseSpecialSkill(Character target)
+  {
+    SpecialSkill.Use(this, target);
   }
 }

@@ -2,12 +2,13 @@ using RPG.RoundPerRound.Domain.Enums;
 
 namespace RPG.RoundPerRound.Domain.Entities;
 
-public abstract class Hero(HeroClass heroClass, string name, int maxHp, int baseAttack, ISkill specialSkill) : Character(name, maxHp, baseAttack, 0)
+public abstract class Hero(HeroClass heroClass, string name, int maxHp, int baseAttack, ISkill specialSkill) : Character(maxHp, baseAttack, 0, specialSkill)
 {
-  public int MaxHp { get; } = maxHp;
+  public string Name { get; } = name;
   public int RemainingHealing { get; protected set; } = 2;
-  private ISkill SpecialSkill { get; } = specialSkill;
   public HeroClass Class { get; } = heroClass;
+  public const int MinNameLength = 3;
+
 
   public void Heal(bool survivedWave = false)
   {
@@ -18,10 +19,5 @@ public abstract class Hero(HeroClass heroClass, string name, int maxHp, int base
     int healAmount = (int)Math.Round(MaxHp * (survivedWave ? 0.20 : 0.25));
     CurrentHp = Math.Min(CurrentHp + healAmount, MaxHp);
     RemainingHealing--;
-  }
-
-  public void UseSpecialSkill(Character target)
-  {
-    SpecialSkill.Use(this, target);
   }
 }

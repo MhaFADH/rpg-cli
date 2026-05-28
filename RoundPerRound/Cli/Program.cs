@@ -11,7 +11,7 @@ public class EntryPoint
 
   public static void Main(string[] args)
   {
-    string userName = ConsoleInput.ReadStringInput("Enter your username : ", Character.MinNameLength);
+    string userName = ConsoleInput.ReadStringInput("Enter your username : ", Hero.MinNameLength);
 
     HeroClass classChoice = (HeroClass)ConsoleInput.ReadChoiceFromMenu("Choose your class : ", Enum.GetNames<HeroClass>());
 
