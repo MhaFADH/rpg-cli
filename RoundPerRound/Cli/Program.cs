@@ -1,26 +1,22 @@
 ﻿
+using RPG.RoundPerRound.Application.Factories;
+using RPG.RoundPerRound.Domain.Entities;
+using RPG.RoundPerRound.Domain.Enums;
 using RPG.RoundPerRound.Infrastructure.Console;
 
 namespace RPG.RoundPerRound.Cli;
 
-
-
 public class EntryPoint
 {
-  enum HeroClasses
-  {
-    Warrior = 1,
-    Mage = 2,
-    Archer = 3
-  }
 
   public static void Main(string[] args)
   {
-    int MIN_NAME_LENGTH = 3;
+    string userName = ConsoleInput.ReadStringInput("Enter your username : ", Character.MinNameLength);
 
-    string userName = ConsoleInput.ReadStringInput("Enter your username : ", MIN_NAME_LENGTH);
+    HeroClass classChoice = (HeroClass)ConsoleInput.ReadChoiceFromMenu("Choose your class : ", Enum.GetNames<HeroClass>());
 
-    int classChoice = ConsoleInput.ReadChoiceFromMenu("Choose your class : ", Enum.GetNames<HeroClasses>());
+    Hero hero = HeroFactory.Create(userName, classChoice);
 
+    Console.WriteLine($"Welcome, {hero.Name} the {hero.Class}!");
   }
 }
