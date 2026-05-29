@@ -1,4 +1,5 @@
 ﻿
+using RPG.RoundPerRound.Application.Builders;
 using RPG.RoundPerRound.Application.Factories;
 using RPG.RoundPerRound.Domain.Entities;
 using RPG.RoundPerRound.Domain.Enums;
@@ -17,6 +18,21 @@ public class EntryPoint
 
     Hero hero = HeroFactory.Create(userName, classChoice);
 
-    Console.WriteLine($"Welcome, {hero.Name} the {hero.Class}!");
+    Console.WriteLine($"name: {hero.Name}\nclass:  {hero.Class}!");
+
+    IReadOnlyList<Wave> waves = new CombatBuilder()
+        .Wave(EnemyClass.Goblin)
+        .Wave(EnemyClass.Goblin, EnemyClass.GoblinArcher)
+        .Wave(EnemyClass.OrcBoss)
+        .Build();
+
+    foreach (Wave wave in waves)
+    {
+      Console.WriteLine($"\n=== Wave {wave.Number} ===");
+      foreach (Enemy enemy in wave.Enemies)
+      {
+        Console.WriteLine($"  - {enemy.GetType().Name} (HP {enemy.CurrentHp}/{enemy.MaxHp}, Armor {enemy.Armor})");
+      }
+    }
   }
 }

@@ -24,7 +24,7 @@ public static class ConsoleInput
   }
 
 
-  public static int ReadChoiceFromMenu(string prompt, string[] choices)
+  public static int ReadChoiceFromMenu(string prompt, params string[] choices)
   {
     while (true)
     {
